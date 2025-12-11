@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SAKTHIVEL D — Portfolio (Fixed)</title>
+<style>
+/* CLEAN FULL WORKING VERSION — FIXED */
+:root{
+  --bg1: rgba(255,105,180,0.55);
+  --bg2: rgba(255,255,102,0.45);
+  --bg3: rgba(102,178,255,0.50);
+  --bg4: rgba(102,255,178,0.45);
+  --glass: rgba(255,255,255,0.60);
+}
+body{margin:0;font-family:Arial;height:100%;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:-1}
+.blob{position:absolute;border-radius:50%;filter:blur(80px)}
+.b1{background:var(--bg1);width:45vmax;height:45vmax;top:10%;left:10%}
+.b2{background:var(--bg2);width:40vmax;height:40vmax;top:20%;left:70%}
+.b3{background:var(--bg3);width:50vmax;height:50vmax;top:70%;left:40%}
+.b4{background:var(--bg4);width:35vmax;height:35vmax;top:80%;left:80%}
+header{display:flex;justify-content:space-between;padding:20px}
+nav a{margin-left:10px;text-decoration:none;padding:8px 12px;border-radius:10px;color:#000}
+nav a.active{background:#fff8}
+main{max-width:1100px;margin:auto;padding:20px}
+.page{display:none;gap:20px;padding:25px;border-radius:18px;background:var(--glass)}
+.page.active{display:flex}
+.home{flex-wrap:wrap}
+.photoBox{width:260px;border-radius:16px;overflow:hidden}
+.photoBox img{width:100%;height:100%;object-fit:cover}
+.btn{padding:10px 18px;border-radius:10px;border:none;background:#ff8fab;cursor:pointer}
+.projectsGrid,.toolsGrid{display:grid;gap:12px}
+.projectsGrid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.toolsGrid{grid-template-columns:1fr 1fr}
+.card,.tool{padding:18px;background:#fff8;border-radius:14px}
+.contacts{display:flex;gap:16px;flex-wrap:wrap}
+.icon{background:#fff8;padding:10px 14px;border-radius:10px;text-decoration:none;color:#000;transition:transform .3s ease, box-shadow .3s ease;}
+
+/* Home page animations */
+.home{animation: fadeIn 1.4s ease forwards; opacity:0;}
+.photoBox{animation: slideInRight 1.2s ease forwards; opacity:0;}
+#typewriter{border-right:2px solid #000;padding-right:4px;animation: blink 0.8s step-end infinite;}
+.btn{transition:transform .2s, box-shadow .2s;}
+.btn:hover{transform:scale(1.08);box-shadow:0 8px 20px rgba(0,0,0,0.2);}  
+
+/* floating animated blobs */
+.blob{animation: floatBlob 18s ease-in-out infinite alternate;}  
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:translateX(0);}}
+@keyframes blink{from{border-color:transparent;}to{border-color:#000;}}
+@keyframes floatBlob{0%{transform:translate(-50%,-50%) scale(1);}100%{transform:translate(-48%,-52%) scale(1.08);}}
+
+
+@keyframes {
+  0%{box-shadow:0 0 0px rgba(255,255,255,0);} 
+  30%{box-shadow:0 0 14px rgba(255,255,255,0.9);} 
+  60%{box-shadow:0 0 22px rgba(255,255,255,1);} 
+  100%{box-shadow:0 0 0px rgba(255,255,255,0);} 
+}
+/* TOOLS PAGE ENHANCEMENTS (A+B+C+D) */
+.toolsGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;
+}
+.tool{
+  background:#ffffffaa;
+  padding:18px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:bold;
+  transition:transform .3s ease, box-shadow .3s ease, background .3s;
+  animation: toolFade 0.8s ease forwards;
+  opacity:0;
+}
+.tool:nth-child(1){animation-delay:0.1s;}
+.tool:nth-child(2){animation-delay:0.25s;}
+.tool:nth-child(3){animation-delay:0.4s;}
+.tool:nth-child(4){animation-delay:0.55s;}
+
+.tool:hover{
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 12px 25px rgba(0,0,0,0.25);
+  background:#fff;
+}
+
+@keyframes toolFade{
+  from{opacity:0; transform:translateY(20px);} 
+  to{opacity:1; transform:translateY(0);} 
+}
+.icon:hover{transform:scale(1.12);box-shadow:0 10px 25px rgba(0,0,0,0.25);} 
+/* TOOL COLORS */
+.t1{background:#ffd6e8aa;} /* pink */
+.t2{background:#fff3b0aa;} /* yellow */
+.t3{background:#c0e8ffaa;} /* blue */
+.t4{background:#c8ffdbaa;} /* green */
+.t5{background:#f3d9ffaa;} /* purple */
+.t6{background:#ffe4c4aa;} /* peach */
+.t7{background:#e8ffe0aa;} /* mint */
+
+/* ICON + ANIMATION */
+.tool{
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  justify-content:center;
+  padding:20px;
+  border-radius:16px;
+  transform:translateY(20px);
+  opacity:0;
+  animation: popIn 0.7s ease forwards;
+}
+.tool:nth-child(1){animation-delay:0.1s;}
+.tool:nth-child(2){animation-delay:0.2s;}
+.tool:nth-child(3){animation-delay:0.3s;}
+.tool:nth-child(4){animation-delay:0.4s;}
+.tool:nth-child(5){animation-delay:0.5s;}
+.tool:nth-child(6){animation-delay:0.6s;}
+.tool:nth-child(7){animation-delay:0.7s;}
+
+@keyframes popIn{
+  0%{opacity:0;transform:translateY(25px) scale(0.9);} 
+  100%{opacity:1;transform:translateY(0) scale(1);} 
+}
+
+.tool:hover{
+  transform:scale(1.06);
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+  transition:0.3s;
+}
+/* PROJECT PAGE ANIMATIONS */
+.card{
+  opacity:0;
+  transform:translateY(25px) scale(0.95);
+  animation: projectPop 0.8s ease forwards;
+}
+.card:nth-child(1){animation-delay:0.1s;}
+.card:nth-child(2){animation-delay:0.25s;}
+.card:nth-child(3){animation-delay:0.4s;}
+.card:nth-child(4){animation-delay:0.55s;}
+
+@keyframes projectPop{
+  0%{opacity:0; transform:translateY(25px) scale(0.95);} 
+  100%{opacity:1; transform:translateY(0) scale(1);} 
+}
+
+.card:hover{
+  transform:scale(1.04);
+  box-shadow:0 12px 28px rgba(0,0,0,0.25);
+  transition:0.3s;
+}
+
+/* CONTACT CARD DESIGN */
+.contactCard{
+  background:#ffffffaa;
+  padding:22px;
+  border-radius:16px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  max-width:360px;
+  animation: contactEnter 1s ease forwards;
+  opacity:0;
+}
+
+/* 🚀 Contact card enters from bottom */
+@keyframes contactEnter{
+  0%{opacity:0; transform:translateY(40px);} 
+  100%{opacity:1; transform:translateY(0);} 
+}
+
+/* Contact Icons Base Style */
+.icon{
+  background:#fff;
+  padding:12px 16px;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:17px;
+  color:#000;
+  transition:.4s ease;
+  text-align:center;
+  opacity:0;
+  animation: iconEnter 0.9s ease forwards;
+}
+
+/* 🚀 Icons enter from LEFT one by one */
+.icon:nth-child(1){animation-delay:0.25s;} /* GitHub */
+.icon:nth-child(2){animation-delay:0.4s;} /* WhatsApp */
+.icon:nth-child(3){animation-delay:0.55s;} /* Gmail */
+.icon:nth-child(4){animation-delay:0.7s;} /* Call */
+
+@keyframes iconEnter{
+  0%{opacity:0; transform:translateX(-35px);} 
+  100%{opacity:1; transform:translateX(0);} 
+}
+
+/* 🔥 Glow on hover */
+.icon:hover{
+  box-shadow:0 0 18px rgba(255,136,170,0.9);
+}
+
+/* 💫 Bounce effect on hover */
+.icon:hover{
+  animation:bounce 0.6s ease;
+}
+
+@keyframes bounce{
+  0%{transform:scale(1);} 
+  30%{transform:scale(1.15);} 
+  60%{transform:scale(0.95);} 
+  100%{transform:scale(1);} 
+}
+
+/* ✨ Icon Rotation */
+.icon:hover{
+  transform:rotate(3deg) scale(1.1);
+}
+
+/* Contact Icons */
+.icon{
+  background:#fff;
+  padding:12px 16px;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:17px;
+  color:#000;
+  transition:.3s;
+  text-align:center;
+  opacity:0;
+  transform:translateX(-20px);
+  animation: contactSlide 0.8s ease forwards;
+}
+.icon:nth-child(1){animation-delay:0.2s;}
+.icon:nth-child(2){animation-delay:0.35s;}
+.icon:nth-child(3){animation-delay:0.5s;}
+.icon:nth-child(4){animation-delay:0.65s;}
+
+@keyframes contactSlide{
+  0%{opacity:0; transform:translateX(-20px);} 
+  100%{opacity:1; transform:translateX(0);} 
+}
+
+.icon:hover{
+  transform:scale(1.10);
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Contact Icons */
+.icon{
+  background:#fff;
+  padding:12px 16px;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:17px;
+  color:#000;
+  transition:.3s;
+  text-align:center;
+}
+.icon:hover{
+  transform:scale(1.08);
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* BIG CALL BUTTON */
+.callBig{
+  margin-top:8px;
+  background:#ff8fab;
+  padding:16px 20px;
+  border-radius:14px;
+  font-size:20px;
+  font-weight:bold;
+  text-align:center;
+  color:white;
+  text-decoration:none;
+  animation: ringPulse 1.4s infinite ease-in-out;
+}
+
+@keyframes ringPulse{
+  0%{transform:scale(1);} 
+  50%{transform:scale(1.06);} 
+  100%{transform:scale(1);} 
+}
+</style>
+</head>
+<body>
+<div class="bg">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+</div>
+<header>
+  <h2>SAKTHIVEL D</h2>
+  <nav>
+    <a href="#" class="navlink active" data-page="home">Home</a>
+    <a href="#" class="navlink" data-page="projects">Projects</a>
+    <a href="#" class="navlink" data-page="tools">Tools</a>
+    <a href="#" class="navlink" data-page="contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="page active home">
+  <div>
+    <h1>SAKTHIVEL D — B.Com, MBA(Finance)</h1>
+    <h3><span id="typewriter"></span></h3>
+    <button class="btn" id="downloadBtn">RESUME / DOWNLOAD</button>
+  </div>
+  <div class="photoBox">
+    <img src="SAKTHIVEL.png" alt="Profile Photo" />
+  </div>
+</section>
+
+<section id="projects" class="page">
+  <h2>Projects</h2>
+  <div class="projectsGrid">
+
+    <div class="card">
+      <h3>GST Filing Automation</h3>
+      <p>Automated monthly GST calculations and prepared filing reports.</p>
+      <p><strong>Tools Used:</strong> Excel, Tally Prime ERP9, Margwin ERP9, IDS NEXT 70 CLIENTS V.7</p>
+    </div>
+
+    <div class="card">
+      <h3>SAP FICO Mini Implementation</h3>
+      <p>Configured FI module, created GL, AP, AR, Asset Accounting, and tested document posting.</p>
+      <p><strong>Tools Used:</strong> SAP S/4HANA</p>
+    </div>
+
+    <div class="card">
+      <h3>Financial Dashboard</h3>
+      <p>Built KPI dashboard for revenue, expenses, and profit analysis.</p>
+      <p><strong>Tools Used:</strong> Excel (Pivot, Charts)</p>
+    </div>
+
+    <div class="card">
+      <h3>Web Portfolio</h3>
+      <p>Created a professional portfolio showcasing my skills, projects, and achievements with a clean, user‑friendly layout.</p>
+      <p><strong>Tools Used:</strong> HTML, CSS, JavaScript</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="tools" class="page">
+  <h2>Technical Tools</h2>
+  <div class="toolsGrid">
+    <div class="tool t1">🧾 SAP FICO</div>
+    <div class="tool t2">📊 Advanced Excel – VLOOKUP, XLOOKUP, HLOOKUP, IF, CHOOSE, Partial & Exact Match</div>
+    <div class="tool t3">📘 Tally</div>
+    <div class="tool t4">📈 Financial Analysis</div>
+    <div class="tool t5">📝 MS Office</div>
+    <div class="tool t6">🏢 Margwin ERP 9</div>
+    <div class="tool t7">💰 GST Software</div>
+  </div>
+</section>
+
+<section id="contact" class="page">
+  <h2>Contact</h2>
+  <div class="contactCard">
+    <a class="icon" href="https://github.com/SakthivelDR" target="_blank">🐙 GitHub</a>
+    <a class="icon" href="https://wa.me/916385553772" target="_blank">💬 WhatsApp</a>
+    <a class="icon" href="mailto:sakthivelsakthidr@gmail.com">✉ Gmail</a>
+    <a class="icon" href="tel:6385553772">📞 Call Me</a>
+
+    
+  </div>
+</section>
+</main>
+
+<script>
+// PAGE SWITCHING
+const links=document.querySelectorAll('.navlink');
+links.forEach(a=>a.onclick=(e)=>{
+  e.preventDefault();
+  links.forEach(x=>x.classList.remove('active'));
+  a.classList.add('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(a.dataset.page).classList.add('active');
+});
+
+// TYPEWRITER FIXED
+const words=["SAP FICO Enthusiast","Accounts and Finance Executive"];
+let i=0,c=0,fwd=true;
+const tw=document.getElementById('typewriter');
+
+function type(){
+  let w=words[i];
+  if(fwd){
+    c++; if(c>w.length) c=w.length;
+    tw.textContent=w.substring(0,c);
+    if(c===w.length){
+      fwd=false;
+      setTimeout(type,1200);
+      return;
+    }
+  } else {
+    c--; if(c<0) c=0;
+    tw.textContent=w.substring(0,c);
+    if(c===0){
+      fwd=true;
+      i=(i+1)%words.length;
+    }
+  }
+  setTimeout(type,80);
+}
+
+type();
+
+// RESUME DOWNLOAD
+const dl=document.getElementById('downloadBtn');
+dl.onclick=()=>{
+  let a=document.createElement('a');
+  a.href='Sakthivel Resume.pdf';
+  a.download='SAKTHIVEL_Resume.pdf';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+};
+</script>
